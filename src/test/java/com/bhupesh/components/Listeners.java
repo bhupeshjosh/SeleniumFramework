@@ -36,7 +36,7 @@ public class Listeners implements ITestListener{
 		try {
 			WebDriver d = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
 			File srcf = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
-			String path = "/Users/bhupeshjoshi/SeleniumTestResult/" + result.getMethod().getMethodName() + ".png";
+			String path = System.getProperty("user.dir") +"/Report/" + result.getMethod().getMethodName() + ".png";
 			try {
 				FileHandler.copy(srcf, new File(path));
 				tl.get().addScreenCaptureFromPath(path);				
@@ -58,7 +58,7 @@ public class Listeners implements ITestListener{
 		try {
 			WebDriver d = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
 			File srcf = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
-			String path = "/Users/bhupeshjoshi/SeleniumTestResult/" + result.getMethod().getMethodName() + ".png";
+			String path = System.getProperty("user.dir") +"/Report/" + result.getMethod().getMethodName() + ".png";
 			try {
 				FileHandler.copy(srcf, new File(path));
 				tl.get().addScreenCaptureFromPath(path);				
