@@ -1,4 +1,4 @@
-package com.bhupesh.selenium;
+package com.bhupesh.AppTest;
 
 import org.testng.annotations.Test;
 
@@ -7,6 +7,7 @@ import com.bhupesh.pom.LoginPage;
 import com.bhupesh.pom.TablePage;
 
 public class TableTest extends TestBase{
+
 	
 	@Test(groups = {"smoke"})
 	public void DeleteTableRecordsTest() {

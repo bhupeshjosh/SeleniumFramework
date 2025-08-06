@@ -15,7 +15,13 @@ public class ExtentReport {
 		if(extent == null) {
 			extent = new ExtentReports();
 			String path = System.getProperty("user.dir") +"//Report" ;
-			new File(path).mkdir();
+			File directory = new File(path);
+			if(new File(path).exists()) {
+				for(File x : directory.listFiles()) {
+					x.delete();
+				}
+			}
+			directory.mkdir();
 			
 			ExtentHtmlReporter reporter = new ExtentHtmlReporter(path +"/index.html");
 			reporter.config().setReportName("Web Execution Result");

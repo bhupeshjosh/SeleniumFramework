@@ -70,6 +70,8 @@ public class LoginPage extends PageBase{
 		Assert.assertFalse(logoutButton.equals(null));
 		logoutButton.click();
 		WebElement userNameElement = waitForElement(username);
+		
+		
 		return userNameElement;
 	}
 	

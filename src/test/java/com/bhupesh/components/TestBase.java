@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.logging.Level;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
 import org.testng.ITestResult;
@@ -21,22 +23,35 @@ import org.testng.annotations.BeforeSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TestBase {
+public abstract class TestBase {
 	
-	public WebDriver driver;
+	protected WebDriver driver;
 	
+	public TestBase() {
+		System.out.println("Base constructor called");
+	/*
+	 *  DOnt use this code. It was written to test multithreding execution by a TestRun class
+	 *  */
+	/*	WebDriverManager.chromedriver().setup();			
+		ChromeOptions opt = new ChromeOptions();
+		opt.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(opt);
+	  */		
+	}
 	@BeforeMethod(alwaysRun = true)
-	public synchronized void setup(Method m) {
+	public void setup(Method m) {
 		System.out.println("<<<<<<<<<<<<<Before Test :" + m.getName()+ ">>>>>>>>>>>>>");
 	}
 
+	public WebDriver getDriver() {
+		return driver;
+	}
 	
 	@AfterMethod(alwaysRun = true)
-	public synchronized void teardown(Method m, ITestResult r) {
+	public void teardown(Method m, ITestResult r) {
 		Reporter.log(m.getName() + " method ends");
 		System.out.println("<<<<<<<<<<<<<Test Status :" + r.getStatus() + ">>>>>>>>>>>>>");		
 		System.out.println("<<<<<<<<<<<<<Before Test :" + m.getName()+ ">>>>>>>>>>>>>");	
-		
 		
 		File srcf = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		try {
@@ -55,20 +70,22 @@ public class TestBase {
 		else if(Configurations.getBrowser().contains("FIREFOX")) {
 			WebDriverManager.firefoxdriver().setup();			
 		}
+		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.SEVERE);		
 	}
 	
 	@BeforeClass(alwaysRun = true)
-	public synchronized void PrepareTest() {
+	public void PrepareTest() {
 		if(Configurations.getBrowser().contains("CHROME")) {
-			driver = new ChromeDriver();		
+			ChromeOptions opt = new ChromeOptions();
+			opt.addArguments("--remote-allow-origins=*");
+			System.setProperty("webdriver.chrome.silentOutput", "true");
+			driver = new ChromeDriver(opt);		
 		}
 		else if(Configurations.getBrowser().contains("FIREFOX")) {
 			driver = new FirefoxDriver();		
 		}		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
-
-		
 	}
 	
 	@AfterClass(alwaysRun = true)

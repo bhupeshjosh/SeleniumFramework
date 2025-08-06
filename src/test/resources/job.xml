@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-<listeners>
-<listener class-name="com.bhupesh.components.Listeners"/>
-</listeners>
   <test name="Test">
-<!--   	<groups>
+   	<groups>
   		<run>
-  			<exclude name="smoke1" />
+  			<include name="job" />
   		</run>
-  	</groups>	-->
+  	</groups>
 	<packages>
-		<package name="com.bhupesh.selenium" />
+		<package name="com.bhupesh.AppTest" />
 	</packages>	 
   </test> <!-- Test -->
 </suite> <!-- Suite -->
