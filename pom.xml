@@ -76,7 +76,7 @@
   </dependencies>
   
   <build>
-  	  <outputDirectory>/Users/${env.USER}/TestArtifacts</outputDirectory>
+  	  <outputDirectory>/Users/${env.USER}/TestArtifacts</outputDirectory>  	  
 	  <testResources>
 	  	<testResource><directory>${project.basedir}/src/test/resources</directory>
 	  	<includes><include>*.xml</include></includes>
@@ -102,7 +102,7 @@
 	        <executions>
 	          <execution>	  
 	         <configuration>
-	          <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+	          <outputDirectory>${project.build.outputDirectory}</outputDirectory>	          
 	          </configuration>          
 	            <goals>
 	              <goal>test-jar</goal>	            

@@ -16,7 +16,7 @@ public class TestNGSuiteRunner {
 			xmls = Arrays.asList(args);
 		}
 		else {
-			xmls.add("testng.xml");
+			//xmls.add("testng.xml");
 			xmls.add("src/test/resources/testng.xml");			
 		}
 		
