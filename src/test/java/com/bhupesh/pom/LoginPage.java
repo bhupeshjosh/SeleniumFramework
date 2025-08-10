@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -49,8 +50,10 @@ public class LoginPage extends PageBase{
 			}			
 			return e;			
 		};
+		WebElement ele = null;
+		ele = wait.until(f);
 		
-		wait.until(f);
+		((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView()", ele);
 		
 		System.out.println("***********login page found*************");
 		driver.findElement(username).sendKeys("testuser");

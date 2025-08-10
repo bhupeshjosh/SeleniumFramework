@@ -54,8 +54,7 @@ public class Listeners implements ITestListener{
 		tl.get().pass(result.toString());
 		tl.get().log(Status.PASS, "My test is pass u see");
 		try {
-			Object obj = result.getInstance();
-	
+			//Object obj = result.getInstance();			
 			// get the driver using getField 
 			// WebDriver d = (WebDriver)obj.getClass().getField("driver").get(obj);
 			/*
@@ -69,8 +68,13 @@ public class Listeners implements ITestListener{
 				System.out.println("@@@@@@@@@ BOTH DRIVER EQUAL@@@@@@@@@");
 			}
 			*/
-			Method getDriverMethod = obj.getClass().getMethod("getDriver");
-			WebDriver d = (WebDriver)getDriverMethod.invoke(obj);
+			//Method getDriverMethod = obj.getClass().getMethod("getDriver");
+			//WebDriver d = (WebDriver)getDriverMethod.invoke(obj);
+			
+			// Or use below . Result.getInstance() will provide the test class instance
+			// upcaste it to TestBase and call getDriver() method defined there.
+			TestBase obj = (TestBase)result.getInstance();
+			WebDriver d = obj.getDriver();
 			obj = null;
 			
 			File srcf = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
@@ -95,7 +99,9 @@ public class Listeners implements ITestListener{
 		// TODO Auto-generated method stub
 		tl.get().fail(result.getThrowable());
 		try {
-			WebDriver d = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+			//WebDriver d = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+			WebDriver d = null;
+			d = ((TestBase)result.getInstance()).getDriver();
 			File srcf = ((TakesScreenshot)d).getScreenshotAs(OutputType.FILE);
 			String path = System.getProperty("user.dir") +"/Report/" + result.getMethod().getMethodName() + ".png";
 			try {

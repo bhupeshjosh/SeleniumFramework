@@ -1,7 +1,5 @@
 package com.bhupesh.AppTest;
 
-import java.awt.Robot;
-
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
