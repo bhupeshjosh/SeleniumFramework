@@ -78,6 +78,7 @@ public abstract class TestBase {
 		if(Configurations.getBrowser().contains("CHROME")) {
 			ChromeOptions opt = new ChromeOptions();
 			opt.addArguments("--remote-allow-origins=*");
+			//opt.setHeadless(true);
 			System.setProperty("webdriver.chrome.silentOutput", "true");
 			driver = new ChromeDriver(opt);		
 		}
