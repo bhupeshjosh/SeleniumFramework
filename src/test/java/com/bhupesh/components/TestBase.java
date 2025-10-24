@@ -51,7 +51,7 @@ public abstract class TestBase {
 	public void teardown(Method m, ITestResult r) {
 		Reporter.log(m.getName() + " method ends");
 		System.out.println("<<<<<<<<<<<<<Test Status :" + r.getStatus() + ">>>>>>>>>>>>>");		
-		System.out.println("<<<<<<<<<<<<<Before Test :" + m.getName()+ ">>>>>>>>>>>>>");	
+		System.out.println("<<<<<<<<<<<<<After Test :" + m.getName()+ ">>>>>>>>>>>>>");	
 		
 		File srcf = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		try {
@@ -85,7 +85,7 @@ public abstract class TestBase {
 			driver = new FirefoxDriver();		
 		}		
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	
 	@AfterClass(alwaysRun = true)
