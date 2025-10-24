@@ -86,7 +86,7 @@ public abstract class TestBase {
 			driver = new FirefoxDriver();		
 		}		
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	
 	@AfterClass(alwaysRun = true)
